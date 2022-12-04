@@ -39,10 +39,23 @@ namespace ByteBank.Modelos
             Cliente = new Cliente();
             _cantidad_cuentas++;
         }
-        
+
+        public CuentaBancaria(string _numero_agencia)
+        {
+            if (_numero_agencia == "")
+            {
+                throw new ArgumentException("Es necesario indicar el número de agencia", nameof(_numero_agencia));
+            }
+            _numero_cuenta = Guid.NewGuid().ToString().Substring(0, 8);
+            NumeroCuenta = _numero_cuenta;
+            NumeroAgencia = _numero_agencia;
+            Cliente = new Cliente();
+            _cantidad_cuentas++;
+        }
+
 
         //Propiedades
- 
+
         /// <summary>
         /// Esta propiedad hace referencia a la instancia de Cliente
         /// </summary>

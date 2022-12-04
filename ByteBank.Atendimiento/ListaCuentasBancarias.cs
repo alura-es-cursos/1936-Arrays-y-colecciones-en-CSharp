@@ -7,98 +7,98 @@ using System.Threading.Tasks;
 
 namespace ByteBank.Atendimiento
 {
-    public class ListaCuentasBancarias
-    {
-        private int posicionActual = 0;
-        private CuentaBancaria[] _listaCuentasBancarias = null;
-
-        public ListaCuentasBancarias(int tamano = 5)
+        public class ListaCuentasBancarias
         {
-            _listaCuentasBancarias = new CuentaBancaria[tamano];
-        }
+            private int posicionActual = 0;
+            private CuentaBancaria[] _listaCuentasBancarias = null;
 
-        public void agregar(CuentaBancaria obj)
-        {
-            validaEspacioObjeto(posicionActual);
-            _listaCuentasBancarias[posicionActual] = obj;
-            //Console.WriteLine($"Agregando elemento en la posicion {posicionActual}");
-            posicionActual++;
-
-        }
-
-        void validaEspacioObjeto(int posicion)
-        {
-            if (_listaCuentasBancarias.Length > posicion)
+            public ListaCuentasBancarias(int tamano = 5)
             {
-                return;
+                _listaCuentasBancarias = new CuentaBancaria[tamano];
             }
-            CuentaBancaria[] nuevoArreglo = new CuentaBancaria[posicion + 1];
-            for (int i = 0; i < _listaCuentasBancarias.Length; i++)
+
+            public void agregar(CuentaBancaria obj)
             {
-                nuevoArreglo[i] = _listaCuentasBancarias[i];
+                validaEspacioObjeto(posicionActual);
+                _listaCuentasBancarias[posicionActual] = obj;
+                //Console.WriteLine($"Agregando elemento en la posicion {posicionActual}");
+                posicionActual++;
+
             }
-            _listaCuentasBancarias = nuevoArreglo;
-        }
 
-        public void remover(CuentaBancaria obj)
-        {
-            int indice = -1;
-
-            for (int i = 0; i < posicionActual; i++)
+            void validaEspacioObjeto(int posicion)
             {
-                CuentaBancaria cuentaActual = _listaCuentasBancarias[i];
-
-                if (cuentaActual == obj)
+                if (_listaCuentasBancarias.Length > posicion)
                 {
-                    indice = i;
-                    break;
+                    return;
                 }
-            }
-
-            for (int i = indice; i < posicionActual - 1; i++)
-            {
-                _listaCuentasBancarias[i] = _listaCuentasBancarias[i + 1];
-            }
-            posicionActual--;
-            _listaCuentasBancarias[posicionActual] = null;
-        }
-
-        public void mostrarLista()
-        {
-            for (int i = 0; i < _listaCuentasBancarias.Length; i++)
-            {
-                if (_listaCuentasBancarias[i] != null)
+                CuentaBancaria[] nuevoArreglo = new CuentaBancaria[posicion + 1];
+                for (int i = 0; i < _listaCuentasBancarias.Length; i++)
                 {
-                    Console.WriteLine($"Cuenta {i} - Nro. {_listaCuentasBancarias[i].NumeroCuenta} - Agencia {_listaCuentasBancarias[i].NumeroAgencia}");
+                    nuevoArreglo[i] = _listaCuentasBancarias[i];
                 }
+                _listaCuentasBancarias = nuevoArreglo;
             }
+
+            public void remover(CuentaBancaria obj)
+            {
+                int indice = -1;
+
+                for (int i = 0; i < posicionActual; i++)
+                {
+                    CuentaBancaria cuentaActual = _listaCuentasBancarias[i];
+
+                    if (cuentaActual == obj)
+                    {
+                        indice = i;
+                        break;
+                    }
+                }
+
+                for (int i = indice; i < posicionActual - 1; i++)
+                {
+                    _listaCuentasBancarias[i] = _listaCuentasBancarias[i + 1];
+                }
+                posicionActual--;
+                _listaCuentasBancarias[posicionActual] = null;
+            }
+
+            public void mostrarLista()
+            {
+                for (int i = 0; i < _listaCuentasBancarias.Length; i++)
+                {
+                    if (_listaCuentasBancarias[i] != null)
+                    {
+                        Console.WriteLine($"Cuenta {i} - Nro. {_listaCuentasBancarias[i].NumeroCuenta} - Agencia {_listaCuentasBancarias[i].NumeroAgencia}");
+                    }
+                }
             
-        }
-
-        public CuentaBancaria obtenerElementoPorPosicion(int posicion)
-        {
-            if (posicion < 0 || posicion > posicionActual)
-            {
-                throw new ArgumentOutOfRangeException(nameof(posicion));
             }
-            return _listaCuentasBancarias[posicion];
-        }
 
-        public int Tamano { 
-            get
+            public CuentaBancaria obtenerElementoPorPosicion(int posicion)
             {
-                return posicionActual;
+                if (posicion < 0 || posicion > posicionActual)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(posicion));
+                }
+                return _listaCuentasBancarias[posicion];
+            }
+
+            public int Tamano { 
+                get
+                {
+                    return posicionActual;
+                }
+            }
+
+            public CuentaBancaria this[int posicion]
+            {
+                get
+                {
+                    return obtenerElementoPorPosicion(posicion);
+                }
             }
         }
-
-        public CuentaBancaria this[int posicion]
-        {
-            get
-            {
-                return obtenerElementoPorPosicion(posicion);
-            }
-        }
-    }
 
    
 }
