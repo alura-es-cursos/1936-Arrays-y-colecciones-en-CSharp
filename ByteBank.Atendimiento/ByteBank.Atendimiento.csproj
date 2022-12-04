@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ByteBank.Modelos\ByteBank.Modelos.csproj" />
+  </ItemGroup>
+
 </Project>

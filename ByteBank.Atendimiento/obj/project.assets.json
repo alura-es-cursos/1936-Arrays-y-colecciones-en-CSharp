@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "ByteBank.Modelos/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/ByteBank.Modelos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ByteBank.Modelos.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "ByteBank.Modelos/1.0.0": {
+      "type": "project",
+      "path": "../ByteBank.Modelos/ByteBank.Modelos.csproj",
+      "msbuildProject": "../ByteBank.Modelos/ByteBank.Modelos.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "ByteBank.Modelos >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\ljcl7\\.nuget\\packages\\": {}
@@ -33,7 +52,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\CursoCSharp6\\ByteBank.Atendimiento\\ByteBank.Modelos\\ByteBank.Modelos.csproj": {
+              "projectPath": "C:\\CursoCSharp6\\ByteBank.Atendimiento\\ByteBank.Modelos\\ByteBank.Modelos.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

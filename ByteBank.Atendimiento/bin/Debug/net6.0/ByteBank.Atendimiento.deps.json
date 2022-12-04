@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "ByteBank.Atendimiento/1.0.0": {
+        "dependencies": {
+          "ByteBank.Modelos": "1.0.0"
+        },
         "runtime": {
           "ByteBank.Atendimiento.dll": {}
+        }
+      },
+      "ByteBank.Modelos/1.0.0": {
+        "runtime": {
+          "ByteBank.Modelos.dll": {}
         }
       }
     }
   },
   "libraries": {
     "ByteBank.Atendimiento/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ByteBank.Modelos/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

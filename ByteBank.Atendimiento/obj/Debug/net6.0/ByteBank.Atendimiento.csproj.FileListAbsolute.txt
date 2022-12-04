@@ -13,3 +13,7 @@ C:\CursoCSharp6\ByteBank.Atendimiento\ByteBank.Atendimiento\obj\Debug\net6.0\ref
 C:\CursoCSharp6\ByteBank.Atendimiento\ByteBank.Atendimiento\obj\Debug\net6.0\ByteBank.Atendimiento.pdb
 C:\CursoCSharp6\ByteBank.Atendimiento\ByteBank.Atendimiento\obj\Debug\net6.0\ByteBank.Atendimiento.genruntimeconfig.cache
 C:\CursoCSharp6\ByteBank.Atendimiento\ByteBank.Atendimiento\obj\Debug\net6.0\ref\ByteBank.Atendimiento.dll
+C:\CursoCSharp6\ByteBank.Atendimiento\ByteBank.Atendimiento\bin\Debug\net6.0\ByteBank.Modelos.dll
+C:\CursoCSharp6\ByteBank.Atendimiento\ByteBank.Atendimiento\bin\Debug\net6.0\ByteBank.Modelos.pdb
+C:\CursoCSharp6\ByteBank.Atendimiento\ByteBank.Atendimiento\bin\Debug\net6.0\ByteBank.Modelos.xml
+C:\CursoCSharp6\ByteBank.Atendimiento\ByteBank.Atendimiento\obj\Debug\net6.0\ByteBank.Atendimiento.csproj.CopyComplete

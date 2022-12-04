@@ -12,7 +12,7 @@ namespace ByteBank.Modelos
         //public string dni;
         //public string profesion;
 
-        public Cliente (string _nombre)
+        public Cliente (string _nombre = "")
         {
             Nombre = _nombre;
         }

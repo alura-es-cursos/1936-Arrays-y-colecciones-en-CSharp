@@ -36,7 +36,7 @@ namespace ByteBank.Modelos
             }
             NumeroCuenta = _numero_cuenta;
             NumeroAgencia = _numero_agencia;
-
+            Cliente = new Cliente();
             _cantidad_cuentas++;
         }
         
