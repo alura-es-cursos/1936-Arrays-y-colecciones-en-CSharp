@@ -15,6 +15,7 @@ Console.WriteLine("La media de las edades es: " + mediaEdades);
 */
 
 using ByteBank.Atendimiento;
+using ByteBank.Atendimiento.ByteBank.Exceptions;
 using ByteBank.Modelos;
 using System.Collections;
 
@@ -152,41 +153,287 @@ void TestArregloListaCuentasBancarias()
 //TestArregloListaCuentasBancarias();
 #endregion
 
+#region métodos de List
+/*
 //Colección
-ArrayList lstCuentasBancarias = new ArrayList();
+
+
+List<CuentaBancaria> lstCuentasBancarias2 = new List<CuentaBancaria>()
+{
+    new CuentaBancaria("123232-B","21343422"),
+    new CuentaBancaria("454532-B","34534422"),
+    new CuentaBancaria("343433-B","57678822"),
+};
+
+List<CuentaBancaria> lstCuentasBancarias3 = new List<CuentaBancaria>()
+{
+    new CuentaBancaria("123232-C","21343433"),
+    new CuentaBancaria("454532-C","34534433"),
+    new CuentaBancaria("343433-C","57678833"),
+};
+
+var rango = lstCuentasBancarias3.GetRange(0,1);
+
+lstCuentasBancarias2.AddRange(rango);
+
+for (int i = 0; i < lstCuentasBancarias2.Count; i++)
+{
+    Console.WriteLine($"Indice[{i}] = Cuenta [{lstCuentasBancarias2[i].NumeroCuenta}]");
+}
+
+//Modo reverso
+lstCuentasBancarias2.Reverse();
+Console.WriteLine("Modo reverso:");
+for (int i = 0; i < lstCuentasBancarias2.Count; i++)
+{
+    Console.WriteLine($"Indice[{i}] = Cuenta [{lstCuentasBancarias2[i].NumeroCuenta}]");
+}
+
+//Limpiar lista
+lstCuentasBancarias2.Clear();
+Console.WriteLine("Limpiamos:");
+for (int i = 0; i < lstCuentasBancarias2.Count; i++)
+{
+    Console.WriteLine($"Indice[{i}] = Cuenta [{lstCuentasBancarias2[i].NumeroCuenta}]");
+}
+*/
+#endregion
+
+List<CuentaBancaria> lstCuentasBancarias = new List<CuentaBancaria>()
+{
+    new CuentaBancaria("123232","21343411")
+    {
+        Cliente = new Cliente
+        {
+            Dni= "13804050",
+            Nombre = "Leonardo"
+        }
+    },
+    new CuentaBancaria("454532","34534411")  {
+        Cliente = new Cliente
+        {
+            Dni= "8001879",
+            Nombre = "Maria"
+        }
+    },
+    new CuentaBancaria("343433","57678811")  {
+        Cliente = new Cliente
+        {
+            Dni= "21183783",
+            Nombre = "Pedro"
+        }
+    },
+};
 
 void menuAtendimiento()
 {
-    char opcion = '0';
-    while(opcion != '6')
+    try
     {
-        Console.Clear();
-        Console.WriteLine("***************************");
-        Console.WriteLine("** 1 - Incluir cuenta   ***");
-        Console.WriteLine("** 2 - Mostrar cuentas  ***");
-        Console.WriteLine("** 3 - Eliminar cuenta  ***");
-        Console.WriteLine("** 4 - Ordenar cuentas  ***");
-        Console.WriteLine("** 5 - Consultar cuenta ***");
-        Console.WriteLine("** 6 - Salir            ***");
-        Console.WriteLine("***************************");
-        Console.Write("Seleccione una opción: ");
-        opcion = Console.ReadLine()[0];
-
-        switch(opcion)
+        char opcion = '0';
+        while (opcion != '6')
         {
-            case '1': IncluirCuenta();
-                break;
-            case '2':
-                MostrarCuentas();
-                break;
-            case '6':break;
-            default: Console.WriteLine("Opción no válida");
-                break;
+            Console.Clear();
+            Console.WriteLine("***************************");
+            Console.WriteLine("** 1 - Incluir cuenta   ***");
+            Console.WriteLine("** 2 - Mostrar cuentas  ***");
+            Console.WriteLine("** 3 - Eliminar cuenta  ***");
+            Console.WriteLine("** 4 - Ordenar cuentas  ***");
+            Console.WriteLine("** 5 - Consultar cuenta ***");
+            Console.WriteLine("** 6 - Salir            ***");
+            Console.WriteLine("***************************");
+            Console.Write("Seleccione una opción: ");
+            try
+            {
+                opcion = Console.ReadLine()[0];
+            } catch(Exception e)
+            {
+                throw new ByteBankException(e.Message);
+            }
+
+            switch (opcion)
+            {
+                case '1':
+                    IncluirCuenta();
+                    break;
+                case '2':
+                    MostrarCuentas();
+                    break;
+                case '3':
+                    EliminarCuentas();
+                    break;
+                case '4':
+                    OrdenarCuentas();
+                    break;
+                case '5':
+                    ConsultarCuentas();
+                    break;
+                case '6': break;
+                default:
+                    Console.WriteLine("Opción no válida");
+                    break;
+            }
         }
+    } catch (ByteBankException e)
+    {
+        Console.WriteLine($"{e.Message}");
     }
 }
 
+void ConsultarCuentas()
+{
+    try
+    {
+        char opcion = '0';
+        while (opcion != '6')
+        {
+            Console.Clear();
+            Console.WriteLine("***************************");
+            Console.WriteLine("***  CONSULTAR CUENTAS  ***");
+            Console.WriteLine("***************************");
+            Console.WriteLine("** 1 - Por DNI          ***");
+            Console.WriteLine("** 2 - Por No. de cuenta***");
+            Console.WriteLine("** 3 - Menu principal   ***");
+            Console.WriteLine("***************************");
+            Console.Write("Seleccione una opción: ");
+            try
+            {
+                opcion = Console.ReadLine()[0];
+            }
+            catch (Exception e)
+            {
+                throw new ByteBankException(e.Message);
+            }
 
+            CuentaBancaria cuentaBancaria = null;
+
+            switch (opcion)
+            {
+                case '1':
+                    cuentaBancaria = ConsultarPorDNI();
+
+                    if (cuentaBancaria != null)
+                    {
+                        Console.WriteLine(cuentaBancaria.ToString());
+                    } else
+                    {
+                        Console.WriteLine("No hay cuentas para este DNI");
+                    }
+                    break;
+                case '2':
+                    cuentaBancaria = ConsultarPorNumeroCuenta();
+                    if (cuentaBancaria != null)
+                    {
+                        Console.WriteLine(cuentaBancaria.ToString());
+                    }
+                    else
+                    {
+                        Console.WriteLine("No hay cuentas con este número");
+                    }
+                    break;
+                
+                case '3':
+                    return;
+                    
+                default:
+                    Console.WriteLine("Opción no válida");
+                    break;
+            }
+            Console.ReadLine();
+        }
+    }
+    catch (ByteBankException e)
+    {
+        Console.WriteLine($"{e.Message}");
+    }
+}
+
+CuentaBancaria ConsultarPorNumeroCuenta()
+{
+    Console.Clear();
+    Console.WriteLine("***************************");
+    Console.WriteLine("***   CONSULTAR POR DNI ***");
+    Console.WriteLine("***************************");
+    Console.Write("Número de cuenta:");
+
+    string numeroCuenta = Console.ReadLine();
+
+    CuentaBancaria cuentaBancaria = null;
+
+    foreach (var item in lstCuentasBancarias)
+    {
+        if (item.NumeroCuenta.Equals(numeroCuenta))
+        {
+            cuentaBancaria = item;
+            break;
+        }
+    }
+    return cuentaBancaria;
+}
+
+CuentaBancaria ConsultarPorDNI()
+{
+    Console.Clear();
+    Console.WriteLine("***************************");
+    Console.WriteLine("***   CONSULTAR POR DNI ***");
+    Console.WriteLine("***************************");
+    Console.Write("DNI:");
+
+    string dni = Console.ReadLine();
+
+    CuentaBancaria cuentaBancaria = null;
+
+    foreach (var item in lstCuentasBancarias)
+    {
+        if (item.Cliente.Dni.Equals(dni))
+        {
+            cuentaBancaria = item;
+            break;
+        }
+    }
+    return cuentaBancaria;
+
+}
+
+void OrdenarCuentas()
+{
+    lstCuentasBancarias.Sort();
+    Console.WriteLine("------- LISTA DE CUENTAS ORDENADA ---");
+    Console.ReadLine();
+
+}
+
+void EliminarCuentas()
+{
+    Console.Clear();
+    Console.WriteLine("***************************");
+    Console.WriteLine("***   ELIMINAR CUENTA   ***");
+    Console.WriteLine("***************************");
+    Console.Write("Numero de cuenta:");
+
+    string numeroCuenta = Console.ReadLine();
+
+    CuentaBancaria cuentaBancaria = null;
+
+    foreach(var item in lstCuentasBancarias)
+    {
+        if (item.NumeroCuenta.Equals(numeroCuenta))
+        {
+            cuentaBancaria = item;
+            break;
+        }
+    }
+
+    if (cuentaBancaria != null)
+    {
+        lstCuentasBancarias.Remove(cuentaBancaria);
+        Console.WriteLine($"Se eliminó la cuenta bancaria con número {numeroCuenta}");
+    } else
+    {
+        Console.WriteLine($"No fue encontrada una cuenta con el número {numeroCuenta}");
+    }
+    Console.ReadLine();
+
+}
 
 void IncluirCuenta()
 {
@@ -251,4 +498,28 @@ void MostrarCuentas()
     }
 }
 
+
+#region clase genérica
+/*
+Generica<int> obj = new Generica<int>();
+
+obj.mostrarMensaje(3);
+
+Generica<string> objS = new Generica<string>();
+
+objS.mostrarMensaje("Este es un texto");
+
+public class Generica<T>
+{
+    public void mostrarMensaje(T t)
+    {
+        Console.WriteLine($"Mostrando {t}");
+    }
+}
+*/
+#endregion
+
+
 menuAtendimiento();
+
+

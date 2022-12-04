@@ -9,7 +9,7 @@ namespace ByteBank.Modelos
     /// <summary>
     /// Esta clase define el modelo de las cuentas bancarias de ByteBank
     /// </summary>
-    public class CuentaBancaria
+    public class CuentaBancaria : IComparable<CuentaBancaria>
     {
         //Atributos de la clase
         public static int _cantidad_cuentas = 0;
@@ -191,7 +191,18 @@ namespace ByteBank.Modelos
 
         public override string ToString()
         {
-            return $"Número de cuenta: {_numero_cuenta}. Número de Agencia: {_numero_agencia}. Saldo: {Saldo}";
+            return $"Número de cuenta: {_numero_cuenta}. \n" +
+                   $"Número de Agencia: {_numero_agencia}.\n" +
+                   $"DNI: {Cliente.Dni}.\n" +
+                   $"Nombre Cliente: {Cliente.Nombre}.\n" +
+                   $"Saldo: {Saldo}";
+        }
+
+        public int CompareTo(CuentaBancaria? other)
+        {
+            if (other == null)
+                return 1;
+            return _numero_cuenta.CompareTo(other._numero_cuenta);
         }
     }
 }
